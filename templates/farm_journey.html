@@ -1,0 +1,296 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>🌱 Farm Journey - AgriVision AI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Chart.js & Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom@2.0.1/dist/chartjs-plugin-zoom.min.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/css/farm_journey.css" />
+  </head>
+
+  <body>
+    <div class="journey-container">
+      
+      <!-- HEADER / NAVIGATION -->
+      <header class="journey-header anim-fade">
+        <div class="header-left">
+          <a href="/" class="back-btn">
+            <span class="arrow">←</span> Back to Dashboard
+          </a>
+        </div>
+        <div class="header-center">
+          <h1 class="journey-title">🌱 FARM JOURNEY</h1>
+          <p class="journey-subtitle">Explore historical farm data & telemetry insights</p>
+        </div>
+        <div class="header-right">
+          <div class="status-badge">
+            <span class="pulse-dot"></span> Telemetry Engine Active
+          </div>
+        </div>
+      </header>
+
+      <!-- MAIN CONTROLS PANEL -->
+      <section class="glass-card controls-card anim-slide-1">
+        <div class="controls-grid">
+          
+          <!-- Quick Time Filters -->
+          <div class="control-group full-width">
+            <label class="control-label">⏱️ Quick Time Filters</label>
+            <div class="filter-pills">
+              <button class="pill-btn active" data-filter="today">Today</button>
+              <button class="pill-btn" data-filter="yesterday">Yesterday</button>
+              <button class="pill-btn" data-filter="7days">Last 7 Days</button>
+              <button class="pill-btn" data-filter="30days">Last 30 Days</button>
+              <button class="pill-btn" data-filter="custom">Custom Date Range</button>
+            </div>
+          </div>
+
+          <!-- Date Range Pickers -->
+          <div class="control-group">
+            <label for="fromDate" class="control-label">📅 From Date</label>
+            <input type="datetime-local" id="fromDate" class="glass-input" />
+          </div>
+
+          <div class="control-group">
+            <label for="toDate" class="control-label">📅 To Date</label>
+            <input type="datetime-local" id="toDate" class="glass-input" />
+          </div>
+
+          <!-- Rack Selection -->
+          <div class="control-group">
+            <label for="rackSelect" class="control-label">🌱 Rack Selection</label>
+            <select id="rackSelect" class="glass-select">
+              <option value="all" selected>All Racks</option>
+              <option value="Rack 1">Rack 1</option>
+              <option value="Rack 2">Rack 2</option>
+            </select>
+          </div>
+
+          <!-- Parameter Selection -->
+          <div class="control-group">
+            <label for="paramSelect" class="control-label">📊 Parameter Selection</label>
+            <select id="paramSelect" class="glass-select">
+              <option value="all" selected>All Parameters</option>
+              <option value="Temperature">Temperature (°C)</option>
+              <option value="Humidity">Humidity (%)</option>
+              <option value="Soil Moisture">Soil Moisture (%)</option>
+              <option value="Air Quality">Air Quality (%)</option>
+              <option value="Water Tank">Common Water Tank (%)</option>
+              <option value="Pump">Pump State</option>
+              <option value="Fan">Fan State</option>
+              <option value="UV Light">UV Light State</option>
+            </select>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="control-group actions-group">
+            <button id="applyFiltersBtn" class="action-btn primary">🔍 Apply Filters</button>
+            <button id="resetFiltersBtn" class="action-btn secondary">🔄 Reset</button>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HISTORICAL GRAPH SECTION (UNIQUE & FUTURISTIC) -->
+      <section class="glass-card chart-card anim-slide-2">
+        <div class="card-header">
+          <div class="card-title-group">
+            <h2 id="chartHeaderTitle">📊 Telemetry Analytics</h2>
+            <span id="recordCountBadge" class="info-badge">0 Records</span>
+          </div>
+          <div class="chart-controls">
+            <button id="resetZoomBtn" class="glass-btn small" title="Reset Zoom">🔍 Reset Zoom</button>
+          </div>
+        </div>
+
+        <!-- Metric Summary Chips -->
+        <div class="metric-summary-bar">
+          <div class="summary-chip" id="chipTemp">
+            <span class="chip-icon">🌡️</span>
+            <div class="chip-data">
+              <span class="chip-lbl">Avg Temp</span>
+              <span class="chip-val" id="avgTempVal">--</span>
+            </div>
+          </div>
+          <div class="summary-chip" id="chipHum">
+            <span class="chip-icon">💧</span>
+            <div class="chip-data">
+              <span class="chip-lbl">Avg Humidity</span>
+              <span class="chip-val" id="avgHumVal">--</span>
+            </div>
+          </div>
+          <div class="summary-chip" id="chipSoil">
+            <span class="chip-icon">🌱</span>
+            <div class="chip-data">
+              <span class="chip-lbl">Avg Soil Moisture</span>
+              <span class="chip-val" id="avgSoilVal">--</span>
+            </div>
+          </div>
+          <div class="summary-chip" id="chipAir">
+            <span class="chip-icon">🍃</span>
+            <div class="chip-data">
+              <span class="chip-lbl">Avg Air Quality</span>
+              <span class="chip-val" id="avgAirVal">--</span>
+            </div>
+          </div>
+          <div class="summary-chip" id="chipWater">
+            <span class="chip-icon">🌊</span>
+            <div class="chip-data">
+              <span class="chip-lbl">Avg Tank Level</span>
+              <span class="chip-val" id="avgWaterVal">--</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Unique Chart Container -->
+        <div class="chart-wrapper unique-chart-container">
+          <canvas id="journeyChart"></canvas>
+        </div>
+      </section>
+
+      <!-- HISTORICAL LOG RECORDS SECTION -->
+      <section class="glass-card table-card anim-slide-3">
+        <div class="table-header-bar">
+          <div class="table-title">
+            <h3>📑 Detailed Log Records</h3>
+          </div>
+          
+          <div class="table-actions">
+            <!-- Search Input -->
+            <div class="search-box">
+              <span class="search-icon">🔍</span>
+              <input type="text" id="tableSearchInput" placeholder="Search date, time, rack..." class="glass-input-sm" />
+            </div>
+
+            <!-- Page Size -->
+            <select id="pageSizeSelect" class="glass-select-sm">
+              <option value="10" selected>10 rows</option>
+              <option value="25">25 rows</option>
+              <option value="50">50 rows</option>
+              <option value="100">100 rows</option>
+            </select>
+
+            <!-- Export Buttons -->
+            <button id="exportCsvBtn" class="export-btn csv">📥 Export CSV</button>
+            <button id="exportPdfBtn" class="export-btn pdf">📄 Export PDF</button>
+          </div>
+        </div>
+
+        <!-- Log Records Dedicated Filters -->
+        <div class="log-filter-panel">
+          <div class="controls-grid">
+            
+            <!-- Log Quick Time Filters -->
+            <div class="control-group full-width">
+              <label class="control-label">⏱️ Quick Time Filters</label>
+              <div class="filter-pills" id="logFilterPills">
+                <button class="pill-btn active" data-filter="today">Today</button>
+                <button class="pill-btn" data-filter="yesterday">Yesterday</button>
+                <button class="pill-btn" data-filter="7days">Last 7 Days</button>
+                <button class="pill-btn" data-filter="30days">Last 30 Days</button>
+                <button class="pill-btn" data-filter="custom">Custom Date Range</button>
+              </div>
+            </div>
+
+            <!-- Date Range Pickers -->
+            <div class="control-group">
+              <label for="logFromDate" class="control-label">📅 From Date</label>
+              <input type="datetime-local" id="logFromDate" class="glass-input" />
+            </div>
+
+            <div class="control-group">
+              <label for="logToDate" class="control-label">📅 To Date</label>
+              <input type="datetime-local" id="logToDate" class="glass-input" />
+            </div>
+
+            <!-- Rack Selection -->
+            <div class="control-group">
+              <label for="logRackSelect" class="control-label">🌱 Rack Selection</label>
+              <select id="logRackSelect" class="glass-select">
+                <option value="all" selected>All Racks</option>
+                <option value="Rack 1">Rack 1</option>
+                <option value="Rack 2">Rack 2</option>
+              </select>
+            </div>
+
+            <!-- Parameter Selection -->
+            <div class="control-group">
+              <label for="logParamSelect" class="control-label">📊 Parameter Selection</label>
+              <select id="logParamSelect" class="glass-select">
+                <option value="all" selected>All Parameters</option>
+                <option value="Temperature">Temperature (°C)</option>
+                <option value="Humidity">Humidity (%)</option>
+                <option value="Soil Moisture">Soil Moisture (%)</option>
+                <option value="Air Quality">Air Quality (%)</option>
+                <option value="Water Tank">Common Water Tank (%)</option>
+                <option value="Pump">Pump State</option>
+                <option value="Fan">Fan State</option>
+                <option value="UV Light">UV Light State</option>
+              </select>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="control-group actions-group">
+              <button id="logApplyFiltersBtn" class="action-btn primary">🔍 Apply Filters</button>
+              <button id="logResetFiltersBtn" class="action-btn secondary">🔄 Reset</button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Table Container -->
+        <div class="table-responsive">
+          <table class="history-table" id="historyTable">
+            <thead>
+              <tr>
+                <th data-sort="date">Date <span>↕</span></th>
+                <th data-sort="time">Time <span>↕</span></th>
+                <th data-sort="rack">Rack <span>↕</span></th>
+                <th data-sort="crop">Crop <span>↕</span></th>
+                <th data-sort="stage">Stage <span>↕</span></th>
+                <th data-sort="temperature">Temp (°C) <span>↕</span></th>
+                <th data-sort="humidity">Humidity (%) <span>↕</span></th>
+                <th data-sort="soil_moisture">Soil (%) <span>↕</span></th>
+                <th data-sort="air_quality">Air Quality (%) <span>↕</span></th>
+                <th data-sort="water_tank">Water (%) <span>↕</span></th>
+                <th data-sort="pump">Pump <span>↕</span></th>
+                <th data-sort="fan">Fan <span>↕</span></th>
+                <th data-sort="uv">UV <span>↕</span></th>
+              </tr>
+            </thead>
+            <tbody id="historyTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-bar">
+          <div id="paginationInfo" class="pagination-info">Showing 0-0 of 0 records</div>
+          <div class="pagination-controls">
+            <button id="prevPageBtn" class="glass-btn small" disabled>← Previous</button>
+            <span id="pageNumbers" class="page-numbers"></span>
+            <button id="nextPageBtn" class="glass-btn small" disabled>Next →</button>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- Custom JS -->
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/farm_journey.js"></script>
+  </body>
+</html>

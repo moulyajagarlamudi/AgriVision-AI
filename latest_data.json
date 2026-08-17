@@ -1,0 +1,41 @@
+{
+    "Zone1": {
+        "Zone": "Zone1",
+        "Temperature": 25.0,
+        "Humidity": 60.0,
+        "Soil_Moisture": 100.0,
+        "Air": 1520,
+        "Water_Level": 0.0
+    },
+    "Zone2": {
+        "Zone": "Zone2",
+        "Temperature": 30.5,
+        "Humidity": 69.0,
+        "Soil_Moisture": 0.0,
+        "Air": 1417,
+        "Water_Level": 0.0
+    },
+    "Relay": {
+        "water_pump": 1,
+        "sprinkler": 0,
+        "zone1_fan": 1,
+        "zone1_uv": 1,
+        "zone1_light": 1,
+        "zone1_sprinkler": 0,
+        "zone2_fan": 1,
+        "zone2_uv": 1,
+        "zone2_light": 1,
+        "zone2_sprinkler": 0,
+        "Zone1Pump": 1,
+        "Zone1Fan": 1,
+        "Zone1UV": 1,
+        "Zone1Sprinkler": 0,
+        "Zone2Pump": 1,
+        "Zone2Fan": 1,
+        "Zone2UV": 1,
+        "Zone2Sprinkler": 0
+    },
+    "Common_Water_Level": 0.0,
+    "Timestamp": "17:27:04",
+    "status": "online"
+}

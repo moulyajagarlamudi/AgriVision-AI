@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AgriVision AI</title>
+    <link rel="stylesheet" href="/static/css/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- ================= HEADER ================= -->
+
+      <div class="header">
+        <a href="/journey" class="farm-journey-btn">🌱 Farm Journey</a>
+        <div id="systemStatus" class="status online">🟢 System Online</div>
+
+        <h1>🌱 AGRIVISION AI</h1>
+        <p>AI-powered smart agriculture monitoring platform</p>
+      </div>
+
+      <!-- ================= AI DIGITAL TWIN SECTION ================= -->
+      <div class="digitalTwinSection">
+        <div class="digitalTwinGrid">
+          <!-- RACK 1 DIGITAL TWIN -->
+          <div class="digitalTwinCard" id="r1DigitalTwin">
+            <div class="twinHeader">
+              <div class="twinTitle">🌱 RACK 1 </div>
+              <div id="r1AiStatusBadge" class="twinStatusBadge perfect">🟢 Perfect Conditions</div>
+            </div>
+
+            <div class="twinVisualContainer">
+              <div id="r1CropIcon" class="twinGraphic">🌾</div>
+              <div class="twinCropMeta">
+                <div id="r1CropName" class="twinCropName">Paddy</div>
+              </div>
+            </div>
+
+            <div class="twinSelectControls">
+              <div class="twinSelectGroup">
+                <label for="r1CropSelect">Select Crop</label>
+                <select id="r1CropSelect">
+                  <option value="Paddy" selected>Paddy 🌾</option>
+                  <option value="Wheat">Wheat 🌾</option>
+                  <option value="Tomato">Tomato 🍅</option>
+                  <option value="Potato">Potato 🥔</option>
+                  <option value="Maize">Maize 🌽</option>
+                  <option value="Chilli">Chilli 🌶</option>
+                  <option value="Onion">Onion 🧅</option>
+                  <option value="Brinjal">Brinjal 🍆</option>
+                  <option value="Cabbage">Cabbage 🥬</option>
+                  <option value="Spinach">Spinach 🍃</option>
+                  <option value="Carrot">Carrot 🥕</option>
+                  <option value="Groundnut">Groundnut 🥜</option>
+                  <option value="Fenugreek">Fenugreek 🌿</option>
+                  <option value="Fennel">Fennel 🌱</option>
+                  <option value="Coriander">Coriander 🍀</option>
+                  <option value="Amaranthus">Amaranthus 🌿</option>
+                </select>
+              </div>
+
+              <div class="twinSelectGroup">
+                <label for="r1StageSelect">Growing Stage</label>
+                <select id="r1StageSelect">
+                  <option value="Seedling">Seedling</option>
+                  <option value="Vegetative" selected>Vegetative</option>
+                  <option value="Flowering">Flowering</option>
+                  <option value="Fruiting">Fruiting</option>
+                  <option value="Harvest">Harvest</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="twinTargetsGrid">
+              <!-- Temp -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>🌡 Temp</span>
+                  <span id="r1TempPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r1LiveTemp" class="twinLiveVal">--</span>
+                  <span id="r1TargetTemp" class="twinTargetVal">Target: 28°C</span>
+                </div>
+              </div>
+
+              <!-- Humidity -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>💧 Humidity</span>
+                  <span id="r1HumPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r1LiveHum" class="twinLiveVal">--</span>
+                  <span id="r1TargetHum" class="twinTargetVal">Target: 80%</span>
+                </div>
+              </div>
+
+              <!-- Soil -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>🌱 Soil Moisture</span>
+                  <span id="r1SoilPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r1LiveSoil" class="twinLiveVal">--</span>
+                  <span id="r1TargetSoil" class="twinTargetVal">Target: 85%</span>
+                </div>
+              </div>
+
+              <!-- Light -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>☀ Light</span>
+                  <span id="r1LightPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r1LiveLight" class="twinLiveVal">--</span>
+                  <span id="r1TargetLight" class="twinTargetVal">Target: High</span>
+                </div>
+              </div>
+
+              <!-- Air -->
+              <div class="twinTargetCard" style="grid-column: span 2;">
+                <div class="twinTargetHeader">
+                  <span>💨 Air Quality</span>
+                  <span id="r1AirPill" class="twinPill optimal">🟢 Good</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r1LiveAir" class="twinLiveVal">--</span>
+                  <span id="r1TargetAir" class="twinTargetVal">Target: Good</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RACK 2 DIGITAL TWIN -->
+          <div class="digitalTwinCard" id="r2DigitalTwin">
+            <div class="twinHeader">
+              <div class="twinTitle">🌱 RACK 2 </div>
+              <div id="r2AiStatusBadge" class="twinStatusBadge optimizing">🟡 Optimizing</div>
+            </div>
+
+            <div class="twinVisualContainer">
+              <div id="r2CropIcon" class="twinGraphic">🍅</div>
+              <div class="twinCropMeta">
+                <div id="r2CropName" class="twinCropName">Tomato</div>
+              </div>
+            </div>
+
+            <div class="twinSelectControls">
+              <div class="twinSelectGroup">
+                <label for="r2CropSelect">Select Crop</label>
+                <select id="r2CropSelect">
+                  <option value="Paddy">Paddy 🌾</option>
+                  <option value="Wheat">Wheat 🌾</option>
+                  <option value="Tomato" selected>Tomato 🍅</option>
+                  <option value="Potato">Potato 🥔</option>
+                  <option value="Maize">Maize 🌽</option>
+                  <option value="Chilli">Chilli 🌶</option>
+                  <option value="Onion">Onion 🧅</option>
+                  <option value="Brinjal">Brinjal 🍆</option>
+                  <option value="Cabbage">Cabbage 🥬</option>
+                  <option value="Spinach">Spinach 🍃</option>
+                  <option value="Carrot">Carrot 🥕</option>
+                  <option value="Groundnut">Groundnut 🥜</option>
+                  <option value="Fenugreek">Fenugreek 🌿</option>
+                  <option value="Fennel">Fennel 🌱</option>
+                  <option value="Coriander">Coriander 🍀</option>
+                  <option value="Amaranthus">Amaranthus 🌿</option>
+                </select>
+              </div>
+
+              <div class="twinSelectGroup">
+                <label for="r2StageSelect">Growing Stage</label>
+                <select id="r2StageSelect">
+                  <option value="Seedling">Seedling</option>
+                  <option value="Vegetative">Vegetative</option>
+                  <option value="Flowering" selected>Flowering</option>
+                  <option value="Fruiting">Fruiting</option>
+                  <option value="Harvest">Harvest</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="twinTargetsGrid">
+              <!-- Temp -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>🌡 Temp</span>
+                  <span id="r2TempPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r2LiveTemp" class="twinLiveVal">--</span>
+                  <span id="r2TargetTemp" class="twinTargetVal">Target: 24°C</span>
+                </div>
+              </div>
+
+              <!-- Humidity -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>💧 Humidity</span>
+                  <span id="r2HumPill" class="twinPill warning">🟡 Adjusting</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r2LiveHum" class="twinLiveVal">--</span>
+                  <span id="r2TargetHum" class="twinTargetVal">Target: 65%</span>
+                </div>
+              </div>
+
+              <!-- Soil -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>🌱 Soil Moisture</span>
+                  <span id="r2SoilPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r2LiveSoil" class="twinLiveVal">--</span>
+                  <span id="r2TargetSoil" class="twinTargetVal">Target: 60%</span>
+                </div>
+              </div>
+
+              <!-- Light -->
+              <div class="twinTargetCard">
+                <div class="twinTargetHeader">
+                  <span>☀ Light</span>
+                  <span id="r2LightPill" class="twinPill optimal">🟢 Optimal</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r2LiveLight" class="twinLiveVal">--</span>
+                  <span id="r2TargetLight" class="twinTargetVal">Target: Medium</span>
+                </div>
+              </div>
+
+              <!-- Air -->
+              <div class="twinTargetCard" style="grid-column: span 2;">
+                <div class="twinTargetHeader">
+                  <span>💨 Air Quality</span>
+                  <span id="r2AirPill" class="twinPill optimal">🟢 Good</span>
+                </div>
+                <div class="twinTargetValues">
+                  <span id="r2LiveAir" class="twinLiveVal">--</span>
+                  <span id="r2TargetAir" class="twinTargetVal">Target: Good</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+<!-- ===========================
+        RACK 1
+=========================== -->
+
+      <div class="rack">
+        <div class="rackTitle">🌱 RACK 1</div>
+
+        <div class="rackGrid">
+          <!-- Temperature -->
+          <div class="card" id="temperatureCard1">
+            <h2>🌡️ Temperature</h2>
+            <h3 id="r1Temperature">-- °C</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Humidity -->
+          <div class="card" id="humidityCard1">
+            <h2>💧 Humidity</h2>
+            <h3 id="r1Humidity">-- %</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Soil -->
+          <div class="card" id="soilCard1">
+            <h2>🌱 Soil Moisture</h2>
+            <h3 id="r1Soil">-- %</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Air -->
+          <div class="card" id="airCard1">
+            <h2>🍃 Air Quality</h2>
+            <h3 id="r1Air">--</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Pump -->
+          <div class="card" id="pumpCard1">
+            <h2>💦 Pump</h2>
+            <h3 id="r1Pump">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- Sprinkler -->
+          <div class="card" id="sprinklerCard1">
+            <h2>🌧️ Sprinkler</h2>
+            <h3 id="r1Sprinkler">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- Fan -->
+          <div class="card" id="fanCard1">
+            <h2>🌀 Fan</h2>
+            <h3 id="r1Fan">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- UV -->
+          <div class="card" id="growCard1">
+            <h2>💡 UV Light</h2>
+            <h3 id="r1Grow">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- Common Water Tank - spans both rows -->
+          <div class="card waterTankCard">
+            <h2>🚰 Common Water Tank</h2>
+            <h3 id="commonWater">-- %</h3>
+            <p class="status">Shared By Both Racks</p>
+          </div>
+        </div>
+
+        <div class="graphRow">
+          <div class="graphCard"><canvas id="r1TempChart"></canvas></div>
+          <div class="graphCard"><canvas id="r1HumChart"></canvas></div>
+          <div class="graphCard"><canvas id="r1SoilChart"></canvas></div>
+          <div class="graphCard"><canvas id="r1AirChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ===========================
+        RACK 2
+=========================== -->
+
+      <div class="rack">
+        <div class="rackTitle">🌱 RACK 2</div>
+
+        <div class="rackGrid">
+          <!-- Temperature -->
+          <div class="card" id="temperatureCard2">
+            <h2>🌡️ Temperature</h2>
+            <h3 id="r2Temperature">-- °C</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Humidity -->
+          <div class="card" id="humidityCard2">
+            <h2>💧 Humidity</h2>
+            <h3 id="r2Humidity">-- %</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Soil -->
+          <div class="card" id="soilCard2">
+            <h2>🌱 Soil Moisture</h2>
+            <h3 id="r2Soil">-- %</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Air -->
+          <div class="card" id="airCard2">
+            <h2>🍃 Air Quality</h2>
+            <h3 id="r2Air">--</h3>
+            <p class="status">Live Sensor</p>
+          </div>
+
+          <!-- Pump -->
+          <div class="card" id="pumpCard2">
+            <h2>💦 Pump</h2>
+            <h3 id="r2Pump">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- Sprinkler -->
+          <div class="card" id="sprinklerCard2">
+            <h2>🌧️ Sprinkler</h2>
+            <h3 id="r2Sprinkler">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- Fan -->
+          <div class="card" id="fanCard2">
+            <h2>🌀 Fan</h2>
+            <h3 id="r2Fan">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- UV -->
+          <div class="card" id="growCard2">
+            <h2>💡 UV Light</h2>
+            <h3 id="r2Grow">OFF</h3>
+            <p class="status">AI Controlled</p>
+          </div>
+
+          <!-- Common Water Tank placeholder (shared, hidden in rack 2) -->
+          <div class="card waterTankCard" id="waterTankCard2">
+            <h2>🚰 Common Water Tank</h2>
+            <h3 id="commonWaterLevel">-- %</h3>
+            <div class="status">SHARED BY BOTH RACKS</div>
+          </div>
+        </div>
+
+        <div class="graphRow">
+          <div class="graphCard"><canvas id="r2TempChart"></canvas></div>
+          <div class="graphCard"><canvas id="r2HumChart"></canvas></div>
+          <div class="graphCard"><canvas id="r2SoilChart"></canvas></div>
+          <div class="graphCard"><canvas id="r2AirChart"></canvas></div>
+        </div>
+      </div>
+
+      <!-- ================= PLANT HEALTH ================= -->
+
+      <h2 class="sectionTitle">PLANT HEALTH</h2>
+
+      <div class="healthRow">
+        <div class="healthCard">
+          <h3>🌿 Rack 1</h3>
+          <h2 id="r1Health">100%</h2>
+          <p id="r1HealthStatus">Excellent</p>
+        </div>
+
+        <div class="healthCard">
+          <h3>🌿 Rack 2</h3>
+          <h2 id="r2Health">100%</h2>
+          <p id="r2HealthStatus">Excellent</p>
+        </div>
+      </div>
+
+      <!-- ================= EVENT LOG ================= -->
+
+      <h2 class="sectionTitle">AUTOMATION EVENT LOG</h2>
+
+      <div class="logRow">
+        <div class="logCard">
+          <div class="logCardHeader">
+            <h3>Combined Events</h3>
+            <button
+              id="downloadLogBtn"
+              class="downloadButton"
+              title="Download event log"
+            >
+              ⬇ PDF
+            </button>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Rack</th>
+                <th>Device</th>
+                <th>Action</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="automationEvents"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ================= NOTIFICATION ================= -->
+
+      <h2 class="sectionTitle">NOTIFICATION CENTER</h2>
+
+      <div class="notificationRow">
+        <div class="notificationCard">
+          <h3>System Notifications</h3>
+          <div id="allNotifications" class="notificationList"></div>
+        </div>
+      </div>
+
+      <div class="footerStatus">
+        <h3>Last Updated : <span id="lastUpdate">--</span></h3>
+      </div>
+    </div>
+
+    <div id="alertPopupContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.28/jspdf.plugin.autotable.min.js"></script>
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/script.js"></script>
+    <script src="/static/js/crop.js"></script>
+  </body>
+</html>
