@@ -1,0 +1,44 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+!.env.sample
+
+# Local credential files
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+secrets.json
+credentials.json
+service-account.json
+*.local
+*.secret
+.envrc
+
+# Python virtual environments
+.venv/
+.venv-1/
+venv/
+ENV/
+env/
+
+# Python cache and local runtime data
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Application runtime files and logs
+*.log
+*.pid
+latest_data.json
+system_status.json
+crop_selection.json
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
