@@ -32,20 +32,20 @@ DHT dht(DHTPIN, DHTTYPE);
 // WIFI
 // ============================================================
 
-const char* WIFI_SSID     = "Moulya";
-const char* WIFI_PASSWORD = "mouj1234";
+const char* WIFI_SSID     = "Your WIFI_SSID";
+const char* WIFI_PASSWORD = "Your WIFI_PASSWORD";
 
 // ============================================================
 // HIVEMQ CLOUD
 // ============================================================
 
-#define MQTT_BROKER_HOST "67000403e5584b348d982f289c69b053.s1.eu.hivemq.cloud"
-#define MQTT_BROKER_PORT 8883
+#define MQTT_BROKER_HOST "YOUR_HIVEMQ_BROKER_HOST"
+#define MQTT_BROKER_PORT YOUR_HIVEMQ_BROKER_PORT
 
 #define MQTT_CLIENT_ID "AgriVision-Zone2"
 
-#define MQTT_USERNAME "Agrivision"
-#define MQTT_PASSWORD "mouls1234"
+#define MQTT_USERNAME "YOUR_HIVEMQ_USERNAME"
+#define MQTT_PASSWORD "YOUR_HIVEMQ_PASSWORD"
 
 // ============================================================
 // TOPICS
